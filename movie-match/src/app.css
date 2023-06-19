@@ -1,0 +1,15 @@
+.details-transition-enter {
+    opacity: 0;
+  }
+  .details-transition-enter-active {
+    opacity: 1;
+    transition: opacity 5000ms;
+  }
+  .details-transition-exit {
+    opacity: 1;
+  }
+  .details-transition-exit-active {
+    opacity: 0;
+    transition: opacity 5000ms;
+  }
+  

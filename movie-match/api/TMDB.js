@@ -57,6 +57,19 @@ export async function getMovieData(id) {
         return error.response.data; // Return the error data instead of the entire error response
       }
   }
+
+  export async function getMovieCredits(id) {
+    try {
+        const response = await axios.get(`${base_url}/movie/${id}/credits`, {
+          params: {
+              api_key: API_KEY,
+          }
+        });
+        return response.data; // Return the movie data instead of the entire response object
+      } catch (error) {
+        return error.response.data; // Return the error data instead of the entire error response
+      }
+  }
   
 
 export async function getGenres() {
