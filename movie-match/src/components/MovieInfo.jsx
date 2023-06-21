@@ -1,7 +1,14 @@
+import { useContext } from "react";
+import { MovieSearchContext } from '../App' 
+import { Link } from 'react-router-dom'
+
+
 
 export default function MovieInfo({ movie }) {
     
     const imageUrl = "https://image.tmdb.org/t/p/w1280"
+    const [searchTerms, setSearchTerms] = useContext(MovieSearchContext)
+
 
     if (!movie || !movie.genres) {
         return <div>Loading...</div>;
@@ -33,26 +40,46 @@ export default function MovieInfo({ movie }) {
                     
                     <div className="flex justify-between px-5 mb-4">
                         <h3 className="font-semibold">Budget</h3>
-                        <p>{movie.budget > 0 ?`${movie.budget}$`: "Unknown"}</p>
+                        <p>{movie.budget > 0 ?`$${movie.budget}`: "Unknown"}</p>
                     </div>
                     
                     <div className="flex justify-between px-5 mb-4">
                         <h3 className="font-semibold">Genres</h3>
                         <div className="flex flex-col text-right">
-                            {movie.genres.map((genre) => <p key={genre.id}>{genre.name}</p>)}
-                        </div>    
+                            {movie.genres.map((genre) =>  {
+                                return (
+                                    <Link
+                                        key={genre.id}
+                                        onClick={() => setSearchTerms({with_genres: genre.id})}
+                                        to={'/'}
+                                    >
+                                        <p>{genre.name}</p>
+                                    </Link>
+                                );
+                            })}
+                        </div>
                     </div>
+                    
                     {movie.production_countries.length >= 1 && 
                     (<div className="flex justify-between px-5 mb-4">
                         <h3 className="font-semibold">{ movie.production_countries.length > 1 ? "Production Countries": "Production Country"}</h3>
                         <div className="flex flex-col">
                             {/* {source: "https://flagsapi.com/"} */}
-                            {movie.production_countries.map((country) => 
-                                <img 
-                                    key={country.id} 
-                                    src={`https://flagsapi.com/${country.iso_3166_1}/flat/64.png`} 
-                                    alt={country.name}
-                                />)}
+                            {movie.production_countries.map((country) => {
+                                return(
+                                <Link
+                                    key={country.id}
+                                    onClick={() => setSearchTerms({with_origin_country: country.iso_3166_1})}
+                                    to={'/'}
+                                >
+                                    <img 
+                                        key={country.id} 
+                                        src={`https://flagsapi.com/${country.iso_3166_1}/flat/64.png`} 
+                                        alt={country.name}
+                                    />
+                                </Link>
+                                )}
+                            )}
                         </div>    
                     </div>)}
                     
@@ -64,15 +91,20 @@ export default function MovieInfo({ movie }) {
                             {movie.production_companies.map((company) => {
                                 if (company.logo_path) {
                                     return (
-                                        <div 
+                                        <Link
                                             key={company.id}
-                                            className="w-20 bg-white my-1 p-1"
+                                            onClick={() => setSearchTerms({with_companies: company.id})}
+                                            to={'/'}
                                         >
-                                            <img 
-                                                src={`${imageUrl}${company.logo_path}`}
-                                                alt={company.name}
-                                            />
-                                        </div>
+                                            <div 
+                                                className="w-20 bg-white my-1 p-1"
+                                            >
+                                                <img 
+                                                    src={`${imageUrl}${company.logo_path}`}
+                                                    alt={company.name}
+                                                />
+                                            </div>
+                                        </Link>
                                         )
                                  }
                             }           

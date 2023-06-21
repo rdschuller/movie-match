@@ -22,6 +22,26 @@ export async function getPopularMovies() {
     }
 }
 
+export async function discoverMovies(searchTerms, pageNum) {
+    try {
+        const response = await axios.get(`${base_url}/discover/movie?`, {
+          params: {
+            api_key: API_KEY,
+            page: pageNum,
+            ...searchTerms
+          },
+        });
+    
+        const movies = response.data.results;
+        const detailedMovies = await getMoviesData(movies); // Use getMovieData to get detailed movie data
+    
+        return detailedMovies;
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+}
+
 export async function getMoviesData(movies) {
     try {
       const moviePromises = movies.map(async (movie) => {

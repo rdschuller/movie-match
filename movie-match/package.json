@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "feather-icons": "^4.29.0",
     "framer-motion": "^10.12.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10",
     "react-router-dom": "^6.13.0",
     "react-transition-group": "^4.4.5"
   },
