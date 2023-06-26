@@ -1,3 +1,5 @@
+/* animations for details page */
+
 .details-transition-enter {
     opacity: 0;
   }
@@ -12,4 +14,21 @@
     opacity: 0;
     transition: opacity 5000ms;
   }
-  
+/* animations for toolbox on homepage */
+.filter-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.filter-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.filter-exit {
+  opacity: 1;
+}
+.filter-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}

@@ -22,13 +22,13 @@ export async function getPopularMovies() {
     }
 }
 
-export async function discoverMovies(searchTerms, pageNum) {
+export async function discoverMovies(filterTerms, pageNum) {
     try {
         const response = await axios.get(`${base_url}/discover/movie?`, {
           params: {
             api_key: API_KEY,
             page: pageNum,
-            ...searchTerms
+            ...filterTerms
           },
         });
     
@@ -40,6 +40,25 @@ export async function discoverMovies(searchTerms, pageNum) {
         console.error(error);
         throw error;
       }
+}
+
+export async function searchMovies(filterTerms) {
+  try {
+      const response = await axios.get(`${base_url}/search/movie?`, {
+        params: {
+          api_key: API_KEY,
+          query: filterTerms
+        },
+      });
+  
+      const movies = response.data.results;
+      const detailedMovies = await getMoviesData(movies); // Use getMovieData to get detailed movie data
+  
+      return detailedMovies;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
 }
 
 export async function getMoviesData(movies) {

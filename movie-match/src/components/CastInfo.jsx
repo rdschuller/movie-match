@@ -1,6 +1,6 @@
 //import dependencies
 import { useContext, useState } from "react";
-import { MovieSearchContext } from '../App' 
+import { MovieFilterContext } from '../App' 
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight} from 'react-feather'
 

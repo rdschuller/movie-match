@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MovieSearchContext } from '../App' 
+import { MovieFilterContext } from '../App' 
 import { Link } from 'react-router-dom'
 
 
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function MovieInfo({ movie }) {
     
     const imageUrl = "https://image.tmdb.org/t/p/w1280"
-    const [searchTerms, setSearchTerms] = useContext(MovieSearchContext)
+    const [filterTerms, setfilterTerms] = useContext(MovieFilterContext)
 
 
     if (!movie || !movie.genres) {
@@ -50,7 +50,7 @@ export default function MovieInfo({ movie }) {
                                 return (
                                     <Link
                                         key={genre.id}
-                                        onClick={() => setSearchTerms({with_genres: genre.id})}
+                                        onClick={() => setfilterTerms({with_genres: genre.id})}
                                         to={'/'}
                                     >
                                         <p>{genre.name}</p>
@@ -69,7 +69,7 @@ export default function MovieInfo({ movie }) {
                                 return(
                                 <Link
                                     key={country.id}
-                                    onClick={() => setSearchTerms({with_origin_country: country.iso_3166_1})}
+                                    onClick={() => setfilterTerms({with_origin_country: country.iso_3166_1})}
                                     to={'/'}
                                 >
                                     <img 
@@ -93,7 +93,7 @@ export default function MovieInfo({ movie }) {
                                     return (
                                         <Link
                                             key={company.id}
-                                            onClick={() => setSearchTerms({with_companies: company.id})}
+                                            onClick={() => setfilterTerms({with_companies: company.id})}
                                             to={'/'}
                                         >
                                             <div 
