@@ -3,11 +3,12 @@ import { useContext } from "react";
 import { MovieSearchContext } from "../App";
 
 export default function SearchBar() {
-  const { control, handleSubmit, register } = useForm();
+  const { control, handleSubmit, register, reset } = useForm();
   const [searchTitle, setSearchTitle] = useContext(MovieSearchContext);
 
   const onSubmit = (data) => {
     setSearchTitle(data.searchQuery);
+    reset();
   };
 
   return (
@@ -15,8 +16,9 @@ export default function SearchBar() {
       <input
         type="text"
         name="searchQuery"
+        autoComplete="off"
         placeholder="Search for movies"
-        className="border border-gray-300 px-3 py-2 rounded-l-md focus:outline-none focus:ring focus:border-red-500"
+        className="border border-red-300 px-3 py-2 rounded-l-md focus:outline-none outline-none focus:ring focus:border-red-500"
         {...register("searchQuery", { required: true })}
       />
       <button type="submit" className="bg-red-500 text-white px-4 py-2 rounded-r-md ml-2">

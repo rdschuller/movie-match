@@ -11,7 +11,7 @@ import '../app.css'
 
 
 export default function Toolbox() {
-    const { control, handleSubmit } = useForm();
+    const { control, handleSubmit, reset } = useForm();
     const [filterTerms, setfilterTerms] = useContext(MovieFilterContext);
     const [genres, setGenres] = useState([]);
     const [showFilter, setShowFilter] = useState(false);
@@ -22,6 +22,7 @@ export default function Toolbox() {
         "primary_release_date.lte": data.endDate,
         "with_genres": data.genre
       });
+      reset();
     };
   
     useEffect(() => {
@@ -32,6 +33,12 @@ export default function Toolbox() {
   
       fetchGenres();
     }, []);
+
+    const form = useForm({
+        defaultValues: {
+            genre: ""
+        }
+    })
   
     return (
       <div className="text-xl font-lato">
@@ -87,7 +94,7 @@ export default function Toolbox() {
                     dropdownMode="select"
                     minDate={new Date("1910/01/01")}
                     maxDate={new Date()}
-                    className="text-black"
+                    className="text-black focus:border-red-500"
                   />
                 )}
               />
@@ -101,8 +108,9 @@ export default function Toolbox() {
                 render={({ field }) => (
                   <select
                     {...field}
-                    className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                    className="mt-1 block w-full rounded-md bg-white border-transparent focus:border-red-500 focus:bg-white focus:ring-0"
                   >
+                    <option value="">Select Genre</option>
                     {genres.map((genre) => (
                       <option key={genre.id} value={genre.id}>
                         {genre.name}
@@ -114,9 +122,9 @@ export default function Toolbox() {
             </div>
             <button
               type="submit"
-              className="bg-red-500 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:ring-red-300 px-6 py-3 rounded-md mb-5 mx-auto inline-block w-auto my-4"
+              className="bg-red-500 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:ring-red-300 px-6 py-3 rounded-md mb-5 mx-auto inline-block w-auto my-4 text-white"
             >
-              Search
+              Filter
             </button>
           </form>
         </CSSTransition>

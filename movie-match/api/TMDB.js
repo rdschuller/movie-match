@@ -42,12 +42,13 @@ export async function discoverMovies(filterTerms, pageNum) {
       }
 }
 
-export async function searchMovies(filterTerms) {
+export async function searchMovies(filterTerms, pageNum) {
   try {
       const response = await axios.get(`${base_url}/search/movie?`, {
         params: {
           api_key: API_KEY,
-          query: filterTerms
+          query: filterTerms,
+          page: pageNum
         },
       });
   

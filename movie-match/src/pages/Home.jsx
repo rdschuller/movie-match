@@ -29,7 +29,7 @@ export default function Home() {
 //search movies if requested through navbar
 useEffect(() => {
     const search = async () => {
-        const movies = await searchMovies(searchTitle);
+        const movies = await searchMovies(searchTitle, 1);
         setmovieGrid(movies);
         console.log(movies);
     }
@@ -42,12 +42,19 @@ useEffect(() => {
     useEffect(() => {
         const fetchMovies = async () => {
             if (page > 1) {
-                const movies = await discoverMovies(filterTerms, page);
-                setmovieGrid(prevMovies => [...prevMovies, ...movies]);
+                if(searchTitle) {
+                    const movies = await searchMovies(searchTitle, page);
+                    setmovieGrid(prevMovies => [...prevMovies, ...movies]);
+                    console.log("more than one page with title" + searchTitle) 
+                }
+                else{
+                    const movies = await discoverMovies(filterTerms, page);
+                    setmovieGrid(prevMovies => [...prevMovies, ...movies]);
+                }
             }
         }
         fetchMovies();
-    }, [page, filterTerms]);
+    }, [page, filterTerms, searchTitle]);
   
 
   const movieList = movieGrid.map(movie => {
@@ -71,15 +78,18 @@ useEffect(() => {
         className='flex flex-col '
     >   
         <Toolbox />
-        <section className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2' layout>
+        <section className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2' >
             {movieGrid.length > 0 && movieList}
         </section>
+        {movieGrid.length === 0 && <h1 className='font-oswald text-5xl self-center text-white p-7'>No Movies Found</h1>}
+        {/* check that movies left are less than 20 and if so do not display button to call for more movies */}
+        {movieGrid.length % 20 === 0 &&
         <button onClick={() => setPage(page + 1)}
             className='bg-red-500 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:ring-red-300 px-6 py-3 rounded-md mb-5 mx-auto inline-block w-auto text-white'
         >
             More Movies...
         </button>
-            
+        }    
     </motion.div>
   )
 }
