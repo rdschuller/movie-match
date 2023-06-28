@@ -31,7 +31,6 @@ useEffect(() => {
     const search = async () => {
         const movies = await searchMovies(searchTitle, 1);
         setmovieGrid(movies);
-        console.log(movies);
     }
     search();
     

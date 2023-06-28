@@ -7,7 +7,8 @@ export default {
     extend: {
       fontFamily: {
         lato: ['Lato', 'sans-serif'],
-        oswald: ['Oswald', 'sans-serif']
+        oswald: ['Oswald', 'sans-serif'],
+        google: ['Open-Sans', 'sans-serif']
       }
     },
   },
