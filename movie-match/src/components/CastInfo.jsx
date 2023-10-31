@@ -1,5 +1,5 @@
 //import dependencies
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { MovieFilterContext } from '../App' 
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight} from 'react-feather'
@@ -11,6 +11,7 @@ import CastCard from "./CastCard";
 export default function Cast({ cast }) {
     
     const [curr, setCurr] = useState(0);
+    
     
 
     const castList = cast && cast.map((actor) => (
@@ -30,9 +31,14 @@ export default function Cast({ cast }) {
     const prev = () => {
         if(curr > 0) setCurr(curr - 1); // Only decrease if not at beginning
     }
+
+    
     const next = () => {
         if(curr < castList.length - 1) setCurr(curr + 1); // Only increase if not at end
+        console.log("Current index:", curr);
+
     }
+    
     
 
     return(
@@ -40,9 +46,7 @@ export default function Cast({ cast }) {
         <div className=" relative">
             <div 
                 className="flex transition-transform ease-out duration-500 "
-                style={{transform: `translateX(-${curr * 100}%)`}}
-                onClick={console.log("something happened")}
-                
+                style={{transform: `translateX(-${curr * 20}%)`}}
             >
                 {castList}
             </div>

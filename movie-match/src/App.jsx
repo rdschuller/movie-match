@@ -7,6 +7,7 @@ import { auth } from '../src/config/firebase'
 //import pages
 import Details from '../src/pages/Details'
 import Home from './pages/Home';
+import User from './pages/User';
 
 export const MovieFilterContext = createContext();
 export const MovieSearchContext = createContext();
@@ -50,6 +51,7 @@ export default function App() {
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />}></Route>
         <Route path='/movie/:id' element={<Details />}></Route>
+        <Route path='/user/:userID' element={<User />}></Route>
       </Routes>
       </AnimatePresence>
     </div>

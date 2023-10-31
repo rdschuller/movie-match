@@ -8,8 +8,9 @@ import { getFirestore } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: "AIzaSyB0mikJyDmRXOK59TikSFRomy_qXfOLdjI",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "moviematch-c3cf4.firebaseapp.com",
   projectId: "moviematch-c3cf4",
   storageBucket: "moviematch-c3cf4.appspot.com",
