@@ -9,8 +9,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'react-feather'
 
 
-
-
 import Popcorn from '../assets/popcorn.svg'
 
 

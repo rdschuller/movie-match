@@ -2,7 +2,6 @@ import axios from "axios";
 
 const API_KEY= import.meta.env.VITE_TMDB_KEY
 const base_url = 'https://api.themoviedb.org/3';
-console.log("TMDB API Key: ", API_KEY);
 axios.get(`${base_url}/movie/popular`, { params: { api_key: API_KEY } })
   .then(response => console.log(response))
   .catch(error => console.log(error));

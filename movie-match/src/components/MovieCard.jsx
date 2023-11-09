@@ -5,6 +5,8 @@ import { useContext, useEffect, useState } from 'react'
 import { db } from '../config/firebase'
 import { auth } from '../config/firebase'
 import { getDoc, doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore'
+import PropTypes from 'prop-types';
+
 
 //import assets
 import BlankPoster from '../assets/blank-poster.png'
@@ -13,6 +15,12 @@ import FilledHeart from '../assets/filled-heart.svg'
 
 
 export default function MovieCard(props) {
+
+    MovieCard.propTypes = {
+        poster: PropTypes.string,
+        title: PropTypes.string,
+        id: PropTypes.number,
+      };
 
     const user = useContext(UserContext)
 
@@ -81,4 +89,5 @@ export default function MovieCard(props) {
       
     )
   }
+
   
